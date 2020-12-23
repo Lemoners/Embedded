@@ -85,7 +85,8 @@ frames = 0
 
 while True:
     if not ret:
-        continue
+        continue 
+
     template = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     template = cv2.resize(template, template_size)
     for i in range(pyr_count):
@@ -97,8 +98,10 @@ while True:
     template = template.astype(np.float32)
     # naive template matching
     # Original
-    # res_mat = cv2.matchTemplate(img, template, cv2.TM_CCORR_NORMED)
-    res_mat = cv2.matchTemplate(img, template, cv2.TM_CCORR)
+    res_mat = cv2.matchTemplate(img, template, cv2.TM_CCORR_NORMED)
+    
+    
+    
     # if top_k > 1, use siamese network to compare candidates
 #    if top_k > 1:
 #        template = cv2.resize(template, (w, h))
@@ -119,6 +122,8 @@ while True:
 #        print(probs.max())
 #        tl = (max_loc[1], max_loc[0])
 #    else:
+    
+    
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res_mat)
     tl = max_loc
     # By me
